@@ -1,21 +1,28 @@
 import {UPDATE_ANSWER, RESET_ANSWER, SUBMIT} from '../constants/action';
 
-const num1 = Math.floor(Math.random() * 100);  
-const num2 = Math.floor(Math.random() * 100); 
+const questionGenerator = () => {
+  const num1 = Math.floor(Math.random() * 10);  
+  const num2 = Math.floor(Math.random() * 10); 
+  
+  return {
+    question: num1 + ' x ' + num2,
+    correctAnswer: num1 * num2
+  }
+}
 
 const stateInit = {
   explanation: 'Find solutions',
-  answerStatus: 'primary',
+  answerStatus: true,
   answerMessage: '',
-  correctAnswer: num1 * num2,
-  question: num1 + ' x ' + num2,
   answer: '',
-  points: 0
+  questionData: questionGenerator(),
+  points: 0,
+  remainingQuestions: 5
 }
 
 const reducer = (state = stateInit, action = {}) => {
 
-  const { explanation, answerStatus, answerMessage, correcAnswer, question, answer, points } = state;
+  const { questionData, answer, points, remainingQuestions } = state;
 
   switch (action.type) {
 
@@ -32,23 +39,26 @@ const reducer = (state = stateInit, action = {}) => {
       }
 
     case SUBMIT:
-      if (parseInt(answer) === correcAnswer) 
+      if (parseInt(answer) === questionData.correctAnswer) 
         return {
           ...state,
           explanation: '',
-          answerMessage: `You are right ${question} = ${correcAnswer}`,
+          answerStatus: true,
+          answerMessage: `You are right ${questionData.question} = ${questionData.correctAnswer}`,
           points: points + 1,
-          question:'',
-          correcAnswer: 0
+          answer: '',
+          questionData: questionGenerator(),
+          remainingQuestions: remainingQuestions - 1
         }
       else 
         return {
           ...state,
           explanation: '',
-          answerStatus: 'secondary',
-          answerMessage: `You are wrong ${question} = ${correcAnswer}`,
-          question: '',
-          correcAnswer: 0
+          answerStatus: false,
+          answerMessage: `You are wrong ${questionData.question} = ${questionData.correctAnswer}`,
+          answer: '',
+          questionData: questionGenerator(),
+          remainingQuestions: remainingQuestions - 1
         }
 
     case 'NEXT':    

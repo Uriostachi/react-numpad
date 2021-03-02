@@ -6,13 +6,13 @@ export const updateAnser = payload => {
   }
 };
 
-export const resetAnser = payload => {
+export const resetAnser = () => {
   return {
     type: RESET_ANSWER
   }
 };
 
-export const submit = payload => {
+export const submit = () => {
   return {
     type: SUBMIT
   }
