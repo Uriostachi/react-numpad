@@ -1,4 +1,4 @@
-import {UPDATE_ANSWER, RESET_ANSWER, SUBMIT} from '../constants/action';
+import { UPDATE_ANSWER, RESET_ANSWER, SUBMIT, RESET_GAME } from '../constants/action';
 
 export const updateAnser = payload => {
   return {
@@ -17,3 +17,9 @@ export const submit = () => {
     type: SUBMIT
   }
 };
+
+export const resetGame = () => {
+  return {
+    type: RESET_GAME
+  }
+}

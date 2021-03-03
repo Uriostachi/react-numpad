@@ -1,4 +1,4 @@
-import {UPDATE_ANSWER, RESET_ANSWER, SUBMIT} from '../constants/action';
+import { UPDATE_ANSWER, RESET_ANSWER, SUBMIT, RESET_GAME } from '../constants/action';
 
 const questionGenerator = () => {
   const num1 = Math.floor(Math.random() * 10);  
@@ -60,6 +60,12 @@ const reducer = (state = stateInit, action = {}) => {
           questionData: questionGenerator(),
           remainingQuestions: remainingQuestions - 1
         }
+
+
+    case RESET_GAME:
+      return (
+        stateInit
+      )
 
     case 'NEXT':    
 

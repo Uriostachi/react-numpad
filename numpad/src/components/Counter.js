@@ -5,12 +5,10 @@ const Counter = () => {
   const { points, remainingQuestions } = useSelector(state => state);
 
   return (
-    <>
-      <Column>
-        <p>you have : {points} points</p>
-        <p>{remainingQuestions} questions remaining</p>
-      </Column>
-    </>
+    <Column>
+      <p>you have : {points} points</p>
+      <p>{remainingQuestions} questions remaining</p>
+    </Column>
   )
 
 }
